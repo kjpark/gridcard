@@ -70,11 +70,14 @@ def validate_gridcard():
 
 def help():
     print('\nvalid syntax includes:')
-    print('\'a1 b2 c3\' OR \'D4 E5 F5\'')
+    print('\n\t\'[D3][G2][A2]\'\n\t\'a1 b2 c3\'\n\t\'D4 E5 F5\'')
 
 def process_input():
     input_ok = []
-    coords = input('\ninput code, lowercase ok:\n\n  -->\t').upper().split()
+    coords = input('\ninput code:\n\n  -->\t').upper().split()
+
+    # handle the [A1][B2][C3] fmt
+    coords = coords[0][1:-1].replace('][', ' ').split() if '[' in coords[0] else coords
 
     for idx, coord in enumerate(coords):
         if coord.__len__() != 2:

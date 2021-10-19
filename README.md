@@ -1,5 +1,5 @@
-# Quest Diagnostics Gridcard
-a tool to speed up login to Quest SSO
+# Qwest Gridcard
+a tool to speed up login to Qwest SSO
 
 # Use
 after cloning / copying the code...

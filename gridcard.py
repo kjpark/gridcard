@@ -49,20 +49,27 @@ J = ''
 
 gridcard = [A, B, C, D, E, F, G, H, I, J]
 
+def help():
+    print('\nvalid syntax is case-insensitive and includes:')
+    print(  '\t[D3][G2][A2]' + 
+          '\n\t[A2] [I5] [A1]' +
+          '\n\ta1 b2 c3' +
+          '\n\tD4E5F5')
+
 def gridcard_error(message, idx, val):
     print('\nERR: Gridcard Format' +
           '\nMSG: {}'.format(message) +
           '\nSRC: {} = {}'.format(string.ascii_uppercase[idx], val))
 
 def validate_gridcard():
-    column_pattern = re.compile('^[A-Z0-9]{5}$')
+    column_regex = re.compile('^[A-Z0-9]{5}$')
     results = []
     for idx, val in enumerate(gridcard):
         if type(val) != str:
             gridcard_error('column not a string', idx, val)
             results.append(False)
             break
-        elif not re.match(column_pattern, val):
+        elif not re.match(column_regex, val):
             gridcard_error('invalid pattern', idx, val)
             results.append(False)
             break
@@ -71,58 +78,43 @@ def validate_gridcard():
 
     return True if all(results) else False    
 
-def help():
-    print('\nvalid syntax includes:')
-    print('\n\t[D3][G2][A2]' + 
-          '\n\t[A2] [I5] [A1]' +
-          '\n\ta1 b2 c3' +
-          '\n\tD4 E5 F5')
+def input_error(message, input):
+    print('\nERR: Bad Input' +
+          '\nMSG: {}\n'.format(message) +
+          '\n IN: {}'.format(input) +
+          '\n RE: ^([A-J][0-5])+$')
+    help()
 
 def process_input():
-    input_ok = []
-    coords = input('\ninput code:\n\n  -->\t').upper().split()
+    input_regex = re.compile('^([A-J][0-5])+$')
+    coords = input('\ninput code:\n\n  -->\t').upper()
+    coords = ''.join(char for char in coords if char.isalnum())
 
-    # handle the [A1][B2][C3] fmt
-    coords = coords[0][1:-1].replace('][', ' ').split() if '[' in coords[0] else coords
-
-    for idx, coord in enumerate(coords):
-        if coord.__len__() != 2:
-            print('\nERR: {} is not 2 chars long'.format(coords[idx]))
-            input_ok.append(False)
-        elif coord[0] not in string.ascii_uppercase:
-            print('\nERR: {} first char must be letter'.format(coords[idx]))
-            input_ok.append(False)
-        elif coord[0] not in string.ascii_uppercase[0:10]:
-            print('\nERR: {} in {} is not between A-J'.format(coord[0], coord))
-            input_ok.append(False)
-        elif coord[1] not in string.digits:
-            print('\nERR: {} second char must be a number'.format(coords[idx]))
-            input_ok.append(False)
-        elif int(coord[1]) not in range(1, 6):
-            print('\nERR: {} in {} is not between 1-5'.format(coord[1], coord))
-            input_ok.append(False)
-        else:
-            input_ok.append(True)
-    
-    return coords if all(input_ok) else False
+    if re.match(input_regex, coords):
+        # split into a list of coords ie 'H1A2C4' -> ['H1', 'A2', 'C4']
+        n = 2
+        coords = [coords[i:i+n] for i in range(0, len(coords), n)]
+        return coords
+    else:
+        input_error('input fails to match regex', coords)
+        return False
 
 def translate(coords):
     result = ''
 
     for coord in coords:
-            x = string.ascii_uppercase.index(coord[0])
-            y = int(coord[1]) - 1 # lists start at 0
-            result += gridcard[x][y]
+        x = string.ascii_uppercase.index(coord[0])
+        y = int(coord[1]) - 1 # lists start at 0
+        result += gridcard[x][y]
 
     print('\n  IN:\t' + ' '.join(coords))
     print('\n OUT:\t' + result)
 
 def main():
-    input = process_input()
-    if validate_gridcard() and input:
-        translate(input)
-    else:
-        help()
+    if validate_gridcard():
+        input = process_input()
+        if input:
+            translate(input)
 
 if __name__ == '__main__':
     main()

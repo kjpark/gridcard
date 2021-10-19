@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import string
+import re
 
 """
 #
@@ -48,19 +49,21 @@ J = ''
 
 gridcard = [A, B, C, D, E, F, G, H, I, J]
 
+def gridcard_error(message, idx, val):
+    print('\nERR: Gridcard Format' +
+          '\nMSG: {}'.format(message) +
+          '\nSRC: {} = {}'.format(string.ascii_uppercase[idx], val))
+
 def validate_gridcard():
+    column_pattern = re.compile('^[A-Z0-9]{5}$')
     results = []
     for idx, val in enumerate(gridcard):
         if type(val) != str:
-            print('\nERR: each gridcard column must be a string')
-            print('SRC: {} = {}'
-                .format(string.ascii_uppercase[idx], val))
+            gridcard_error('column not a string', idx, val)
             results.append(False)
             break
-        elif val.__len__() != 5:
-            print('\nERR: each gridcard column must be 5 chars long')
-            print('SRC: {} = \'{}\''
-                .format(string.ascii_uppercase[idx], val))
+        elif not re.match(column_pattern, val):
+            gridcard_error('invalid pattern', idx, val)
             results.append(False)
             break
         else:
@@ -70,7 +73,10 @@ def validate_gridcard():
 
 def help():
     print('\nvalid syntax includes:')
-    print('\n\t\'[D3][G2][A2]\'\n\t\'a1 b2 c3\'\n\t\'D4 E5 F5\'')
+    print('\n\t[D3][G2][A2]' + 
+          '\n\t[A2] [I5] [A1]' +
+          '\n\ta1 b2 c3' +
+          '\n\tD4 E5 F5')
 
 def process_input():
     input_ok = []

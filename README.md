@@ -2,6 +2,7 @@
 a tool to speed up login to Quest SSO
 
 # Use
+after cloning / copying the code...
 1. edit `config.py` to match your gridcard
 2. `python3 gridcard.py`
 

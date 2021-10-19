@@ -20,7 +20,7 @@ def gridcard_error(message, idx, val):
           '\nSRC: {} = {}'.format(string.ascii_uppercase[idx], val))
 
 def validate_gridcard():
-    column_regex = re.compile('^[A-Z0-9]{5}$')
+    column_regex = re.compile('^[A-Za-z0-9]{5}$')
     results = []
     for idx, val in enumerate(gridcard):
         if type(val) != str:

@@ -3,49 +3,7 @@
 import string
 import re
 
-"""
-#
-# 1. SETUP
-#
-
-for each column, enter values from top to bottom
-
-ex:
-    | A | B | ...
-    --------- ...
-| 1 | H | W | ...
-| 2 | 3 | 0 | ... ----> A = 'H3110'
-| 3 | 1 | R | ...       B = 'W0RLD'
-| 4 | 1 | L | ...       ...
-| 5 | 0 | D | ...
-    --------- ...
-
-#
-# 2. USE
-#
-
-`python3 gridcard.py`
-
-"""
-
-#
-# EDIT THIS
-#
-
-A = ''
-B = ''
-C = ''
-D = ''
-E = ''
-F = ''
-G = ''
-H = ''
-I = ''
-J = ''
-
-#
-# NO MORE EDITS REQD
-#
+from config import *
 
 gridcard = [A, B, C, D, E, F, G, H, I, J]
 
@@ -66,11 +24,11 @@ def validate_gridcard():
     results = []
     for idx, val in enumerate(gridcard):
         if type(val) != str:
-            gridcard_error('column not a string', idx, val)
+            gridcard_error('column not a string, check `config.py`', idx, val)
             results.append(False)
             break
         elif not re.match(column_regex, val):
-            gridcard_error('invalid pattern', idx, val)
+            gridcard_error('invalid pattern, check `config.py`', idx, val)
             results.append(False)
             break
         else:

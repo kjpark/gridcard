@@ -12,7 +12,8 @@ def help():
     print(  '\t[D3][G2][A2]' + 
           '\n\t[A2] [I5] [A1]' +
           '\n\ta1 b2 c3' +
-          '\n\tD4E5F5')
+          '\n\tD4E5F5' +
+          '\n\tE2] [H1] [H4 \t# partial entries containing all essential info OK')
 
 def gridcard_error(message, idx, val):
     print('\nERR: Gridcard Format' +

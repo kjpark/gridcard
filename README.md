@@ -7,10 +7,13 @@ after cloning / copying the code...
 2. `python3 gridcard.py`
 
 valid syntax is case-insensitive:
-- a1 b2 c3
-- A1B2C3
-- [a1][b2][c3]
-- [A1] [B2] [C3]
+```
+a1 b2 c3
+A1B2C3
+[a1][b2][c3]
+[A1] [B2] [C3]
+E2] [H1] [H4 # partial entries containing all essential info OK
+```
 
 you can set up an alias if you'd like
 

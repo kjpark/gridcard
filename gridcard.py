@@ -76,7 +76,7 @@ def translate(coords):
 
 def clipboard(clipresult):
     thisSystem = platform.system()
-    if thisSystem == 'Darwinx':
+    if thisSystem == 'Darwin':
         cmd='echo '+clipresult.strip()+'|pbcopy'
         return check_call(cmd, shell=True)
     elif thisSystem == 'Windows':

@@ -19,6 +19,12 @@ you can set up an alias if you'd like
 
 `alias grid="python3 ~/path/to/gridcard.py"`
 
+
+to include copy to clipboard option (currently supported in Darwin/Windows)
+
+In config.py change autoCopy value to `True`
+
+
 # Warnings / Disclaimer
 this is not an official tool, use at your own risk.
 if you'd like to contribute, please DO NOT commit your

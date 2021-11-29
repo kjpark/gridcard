@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+from subprocess import check_call
+import platform
 import string
 import re
 
@@ -68,6 +70,20 @@ def translate(coords):
 
     print('\n  IN:\t' + ' '.join(coords))
     print('\n OUT:\t' + result)
+
+    if autoCopy == True:
+        clipboard(result)
+
+def clipboard(clipresult):
+    thisSystem = platform.system()
+    if thisSystem == 'Darwin':
+        cmd='echo '+clipresult.strip()+'|pbcopy'
+        return check_call(cmd, shell=True)
+    elif thisSystem == 'Windows':
+        cmd='echo '+clipresult.strip()+'|clip'
+        return check_call(cmd, shell=True)
+    else :
+        print(f"\n{thisSystem} is not yet able to use clipboard\n")
 
 def main():
     if validate_gridcard():

@@ -23,3 +23,6 @@ G = ''
 H = ''
 I = ''
 J = ''
+
+# Auto Copy to Clipboard?
+autoCopy = True

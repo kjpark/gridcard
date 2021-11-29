@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import string
+import pyperclip3 as pc
 import re
 
 from config import *
@@ -68,6 +69,12 @@ def translate(coords):
 
     print('\n  IN:\t' + ' '.join(coords))
     print('\n OUT:\t' + result)
+
+    if autoCopy == True:
+        clipboard(result)
+
+def clipboard(clipresult):
+    pc.copy(clipresult)
 
 def main():
     if validate_gridcard():

@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 
+from subprocess import check_call
+import platform
 import string
-import pyperclip3 as pc
 import re
 
 from config import *
@@ -74,7 +75,15 @@ def translate(coords):
         clipboard(result)
 
 def clipboard(clipresult):
-    pc.copy(clipresult)
+    thisSystem = platform.system()
+    if thisSystem == 'Darwinx':
+        cmd='echo '+clipresult.strip()+'|pbcopy'
+        return check_call(cmd, shell=True)
+    elif thisSystem == 'Windows':
+        cmd='echo '+clipresult.strip()+'|clip'
+        return check_call(cmd, shell=True)
+    else :
+        print(f"\n{thisSystem} is not yet able to use clipboard\n")
 
 def main():
     if validate_gridcard():

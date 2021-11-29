@@ -20,11 +20,9 @@ you can set up an alias if you'd like
 `alias grid="python3 ~/path/to/gridcard.py"`
 
 
-to include copy to clipboard option
+to include copy to clipboard option (currently supported in Darwin/Windows)
 
-1. first run `pip install requirements.txt` from within this directory
-
-1. In config.py change autoCopy value to `True`
+In config.py change autoCopy value to `True`
 
 
 # Warnings / Disclaimer
